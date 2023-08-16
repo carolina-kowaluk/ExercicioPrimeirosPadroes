@@ -42,4 +42,8 @@ public class Consultas {
             .filter(consultaPadrao)
             .toList();
     }
+
+    public void alteraConsultaPadrao(Predicate predicate){
+        consultaPadrao = predicate;
+    }
 }
