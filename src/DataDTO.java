@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class DataDTO {
     private Integer dia;
     private Integer mes;
