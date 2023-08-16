@@ -9,16 +9,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Consultas {
-    private List<RegistroDoTempo> registros;
-    private String nArq;
 
-    public Consultas(){
-        registros = new LinkedList<>();
-        this.nArq = "poa_temps.txt";
+    private RegistroDoTempoRepository _repository;
+
+    public Consultas(RegistroDoTempoRepository repository){
+        _repository = repository;
     }
 
     public List<String> datasEmQueChouveuMaisDe(double milimetros){
-        return registros
+        return _repository.getAll()
             .stream()
             .filter(r->r.getPrecipitacao() > milimetros)
             .map(r->r.getDia()+"/"+r.getMes()+"/"+r.getAno())
@@ -26,7 +25,7 @@ public class Consultas {
     }
 
     public String diaQueMaisChoveuNoAno(int ano){
-        RegistroDoTempo registro = registros
+        RegistroDoTempo registro = _repository.getAll()
         .stream()
         .filter(reg->reg.getAno() == ano)
         .max(Comparator.comparing(RegistroDoTempo::getPrecipitacao))
